@@ -10,3 +10,6 @@ Para fazer a execução dos exercícios estou utilizando o Docker e passando o n
 ## Exercícios presentes
 
 - Criação de um caixa eletrônico
+- FAQ
+- Validação/Criação de CPF
+- Achar número duplicado
