@@ -12,8 +12,7 @@ def undoChore():
   if len(chores) == 0:
     raise ValueError('Não há items na lista!!!')
 
-  removedChores.append(chores[-1])
-  chores.pop()
+  removedChores.append(chores.pop())
 
   return None
 
@@ -21,7 +20,6 @@ def redoChore():
   if len(removedChores) == 0:
     raise ValueError('Não há items a serem refeitos!!!')
 
-  chores.append(removedChores[0])
-  del removedChores[0]
+  chores.append(removedChores.pop(0))
 
   return None
