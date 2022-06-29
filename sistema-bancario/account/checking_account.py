@@ -17,6 +17,6 @@ class CheckingAccount(Account):
 
   def withdraw(self, withdraw_value: Union[int, float]):
     if (self.balance + self.limit) < withdraw_value:
-      raise ValueError(f'O valor para retirada (R$ {withdraw_value:.2}) excede a soma do saldo (R$ {self.balance:.2}) e limite (R$ {self.limit}) disponíveis!!!')
+      raise ValueError(f'O valor para retirada (R$ {withdraw_value:.2f}) excede a soma do saldo (R$ {self.balance:.2f}) e limite (R$ {self.limit}) disponíveis!!!')
 
     self.balance -= withdraw_value

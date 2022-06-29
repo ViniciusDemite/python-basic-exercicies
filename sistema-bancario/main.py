@@ -74,10 +74,10 @@ while True:
     elif option == 2:
       has_limit = hasattr(bank.current_client.account, 'limit')
 
-      print(f'Saldo disponível: R$ {bank.current_client.account.balance:.2}', end='\n' if has_limit else '\n\n')
+      print(f'Saldo disponível: R$ {bank.current_client.account.balance:.2f}', end='\n' if has_limit else '\n\n')
 
       if has_limit:
-        print(f'Limite disponível: R$ {bank.current_client.account.limit:.2}', end='\n\n')
+        print(f'Limite disponível: R$ {bank.current_client.account.limit:.2f}', end='\n\n')
 
         withdraw_value = float(input('Valor do saque: '))
 
@@ -87,7 +87,7 @@ while True:
 
         bank.current_client.account.deposit(deposit)
 
-        print('Valor depositado com sucesso!!!', f'Saldo atual: {bank.current_client.account.balance:.2}', sep='\n', end='\n\n')
+        print('Valor depositado com sucesso!!!', f'Saldo atual: {bank.current_client.account.balance:.2f}', sep='\n', end='\n\n')
   except ValueError as error:
     print('É necessário digitar um número inteiro válido!!!')
     continue
