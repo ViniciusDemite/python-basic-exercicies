@@ -27,45 +27,46 @@ from client.client import Client
 from account.checking_account import CheckingAccount
 from account.savings_account import SavingsAccount
 from bank.bank import Bank
+import json
 
 
-if __name__ == '__main__':
-  c1_account = SavingsAccount(agency='5264826', number='5260319', balance=1500)
-  c2_account = CheckingAccount(agency='2603056', number='8596314', balance=1000.5)
-  c3_account = SavingsAccount(agency='4152067', number='5896472', balance=2550.90)
+bank = Bank(name='NuBank')
 
-  c1 = Client(name='Vinicius', age=24, account=c1_account)
-  c2 = Client(name='Rebecca', age=25, account=c2_account)
-  c3 = Client(name='Renata', age=23, account=c3_account)
+def create_clients_and_accounts():
+  clients = import_clients()
 
-  bank = Bank(name='NuBank')
-  bank.clients = c1
-  bank.clients = c2
-  bank.clients = c3
+  for client in clients:
+    params = [client['account'], client['account_number'], client['balance']]
 
-  bank.accounts = c1_account
-  bank.accounts = c2_account
-  bank.accounts = c3_account
+    bank.accounts = SavingsAccount(*params) if client['account'] == 'savings' else CheckingAccount(*params)
 
-  while True:
-    print('Bem-vindo ao sistema bancário!!', 'Digite suas informações para acessar a conta:', sep='\n', end='\n\n')
+    bank.clients = Client(name=client['name'], age=client['age'], account=bank.accounts[-1])
 
-    name = input('Nome: ')
-    agency = input('Agência: ')
-    account_number = input('Número da conta: ')
+def import_clients() -> list:
+  with open('clients.json') as file:
+    data = json.load(file)
 
-    if not bank.is_authenticated(agency=agency, account_number=account_number, client_name=name):
-      print(f'Client ou conta não encontrados no banco {bank.name}!!!', end='\n\n')
-      continue
+  return data['clients']
 
-    print('Qual operação deseja realizar?', '1 - Depósito', '2 - Saque', '3 - Sair', sep='\n', end='\n\n')
+while True:
+  print('Bem-vindo ao sistema bancário!!', 'Digite suas informações para acessar a conta:', sep='\n', end='\n\n')
 
-    try:
-      option = int(input('Opção: '))
-    except ValueError:
-      print('É necessário digitar um número correspondente as opções dadas!!!')
-      continue
+  name = input('Nome: ')
+  agency = input('Agência: ')
+  account_number = input('Número da conta: ')
 
-    if option == 3:
-      print('Simulação finalizada')
-      break
+  if not bank.is_authenticated(agency, account_number, name):
+    print(f'Client ou conta não encontrados no banco {bank.name}!!!', end='\n\n')
+    continue
+
+  print('Qual operação deseja realizar?', '1 - Depósito', '2 - Saque', '3 - Sair', sep='\n', end='\n\n')
+
+  try:
+    option = int(input('Opção: '))
+  except ValueError:
+    print('É necessário digitar um número correspondente as opções dadas!!!')
+    continue
+
+  if option == 3:
+    print('Simulação finalizada')
+    break

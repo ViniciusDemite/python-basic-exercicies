@@ -3,8 +3,8 @@ from types import Union
 
 
 class SavingsAccount(Account):
-  def withdraw(self, value: Union[int, float]):
-    if self.balance < value:
-      raise ValueError(f'O valor para retirada (R$ {value:.2}) é maior que o saldo disponível (R$ {self.balance:.2})')
+  def withdraw(self, withdraw_value: Union[int, float]):
+    if self.balance < withdraw_value:
+      raise ValueError(f'O valor para retirada (R$ {withdraw_value:.2}) é maior que o saldo disponível (R$ {self.balance:.2})')
 
-    self.balance -= value
+    self.balance -= withdraw_value

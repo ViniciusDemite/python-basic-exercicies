@@ -1,0 +1,36 @@
+{
+	"clients": [
+		{
+			"name": "Vinicius",
+			"age": 24,
+			"agency": "5264826",
+			"account_number": "5260319",
+			"account": "savings",
+			"balance": 1500
+		},
+		{
+			"name": "Rebecca",
+			"age": 25,
+			"agency": "2603056",
+			"account_number": "8596314",
+			"account": "checking",
+			"balance": 1000.5
+		},
+		{
+			"name": "Renata",
+			"age": 23,
+			"agency": "4152067",
+			"account_number": "5896472",
+			"account": "checking",
+			"balance": 2550.75
+		},
+		{
+			"name": "Pedro",
+			"age": 26,
+			"agency": "2568794",
+			"account_number": "4102897",
+			"account": "savings",
+			"balance": 3264.25
+		}
+	]
+}

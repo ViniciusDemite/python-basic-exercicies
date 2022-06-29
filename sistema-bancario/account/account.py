@@ -27,5 +27,5 @@ class Account(ABC):
     self.balance += value
 
   @abstractstaticmethod
-  def withdraw(self):
+  def withdraw(self, withdraw_value: Union[int, float]):
     pass
