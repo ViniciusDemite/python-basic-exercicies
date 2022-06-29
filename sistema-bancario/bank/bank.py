@@ -7,12 +7,21 @@ from types import Union
 class Bank:
   def __init__(self, name: str):
     self._name = name
+    self._agencies = ['5264826', '2603056', '4152067', '2568794']
     self._clients = []
-    self._accounts = []
+    self._current_client = None
 
   @property
   def name(self):
     return self._name
+
+  @property
+  def current_client(self):
+    return self._current_client
+
+  @property
+  def agencies(self):
+    return self._agencies
 
   @property
   def clients(self):
@@ -22,19 +31,16 @@ class Bank:
   def clients(self, client: Client):
     self._clients.append(client)
 
-  @property
-  def accounts(self):
-    return self._accounts
+  def is_authenticated(self, agency: str, cpf: str, account_number: str) -> bool:
+    if agency not in self.agencies:
+      return False
 
-  @accounts.setter
-  def accounts(self, account: Union[CheckingAccount, SavingsAccount]):
-    self._accounts.append(account)
+    try:
+      self._current_client = [client for client in self.clients if client.cpf == cpf][0]
 
-  def is_authenticated(self, agency: str, client_name: str, account_number: str) -> bool:
-    account = [account for account in self.accounts if account.agency == agency and account.number == account_number]
-    client = [client for client in self.clients if client.name == client_name]
-
-    if len(client) != 1 or len(account) != 1:
+      if self.current_client.account.number != account_number:
+        return False
+    except IndexError:
       return False
 
     return True

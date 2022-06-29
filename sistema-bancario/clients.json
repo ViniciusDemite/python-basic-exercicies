@@ -3,6 +3,7 @@
 		{
 			"name": "Vinicius",
 			"age": 24,
+			"cpf": "40811374807",
 			"agency": "5264826",
 			"account_number": "5260319",
 			"account": "savings",
@@ -11,6 +12,7 @@
 		{
 			"name": "Rebecca",
 			"age": 25,
+			"cpf": "15268948201",
 			"agency": "2603056",
 			"account_number": "8596314",
 			"account": "checking",
@@ -19,6 +21,7 @@
 		{
 			"name": "Renata",
 			"age": 23,
+			"cpf": "15879536424",
 			"agency": "4152067",
 			"account_number": "5896472",
 			"account": "checking",
@@ -27,6 +30,7 @@
 		{
 			"name": "Pedro",
 			"age": 26,
+			"cpf": "05741875235",
 			"agency": "2568794",
 			"account_number": "4102897",
 			"account": "savings",

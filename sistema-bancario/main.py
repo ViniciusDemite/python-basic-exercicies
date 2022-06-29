@@ -36,11 +36,11 @@ def create_clients_and_accounts():
   clients = import_clients()
 
   for client in clients:
-    params = [client['account'], client['account_number'], client['balance']]
+    params = [client['account'], client['account_number'], client['balance'], client['cpf']]
 
-    bank.accounts = SavingsAccount(*params) if client['account'] == 'savings' else CheckingAccount(*params)
+    account = SavingsAccount(*params) if client['account'] == 'savings' else CheckingAccount(*params)
 
-    bank.clients = Client(name=client['name'], age=client['age'], account=bank.accounts[-1])
+    bank.clients = Client(name=client['name'], age=client['age'], account=account)
 
 def import_clients() -> list:
   with open('clients.json') as file:
@@ -51,11 +51,11 @@ def import_clients() -> list:
 while True:
   print('Bem-vindo ao sistema bancário!!', 'Digite suas informações para acessar a conta:', sep='\n', end='\n\n')
 
-  name = input('Nome: ')
+  cpf = input('CPF: ')
   agency = input('Agência: ')
   account_number = input('Número da conta: ')
 
-  if not bank.is_authenticated(agency, account_number, name):
+  if not bank.is_authenticated(agency, cpf, account_number):
     print(f'Client ou conta não encontrados no banco {bank.name}!!!', end='\n\n')
     continue
 
@@ -63,10 +63,25 @@ while True:
 
   try:
     option = int(input('Opção: '))
-  except ValueError:
-    print('É necessário digitar um número correspondente as opções dadas!!!')
-    continue
 
-  if option == 3:
-    print('Simulação finalizada')
-    break
+    if option == 3:
+      print('Simulação finalizada')
+      break
+    elif option == 2:
+      has_limit = hasattr(bank.current_client.account, 'limit')
+
+      print(f'Saldo disponível: R$ {bank.current_client.account.balance:.2}', end='\n' if has_limit else '\n\n')
+
+      if has_limit:
+        print(f'Limite disponível: R$ {bank.current_client.account.limit:.2}', end='\n\n')
+
+        withdraw_value = float(input('Valor do saque: '))
+
+        bank.current_client.account.withdraw(withdraw_value)
+    else:
+        deposit = float(input('Digite o valor do depósito: '))
+
+        bank.current_client.account.deposit(deposit)
+  except ValueError as error:
+    print('É necessário digitar um número inteiro válido!!!')
+    continue

@@ -5,8 +5,8 @@ from types import Union
 
 
 class Client(Person):
-  def __init__(self, name: str, age: int, account: Union[CheckingAccount, SavingsAccount]):
-    super().__init__(name, age)
+  def __init__(self, name: str, age: int, cpf: str, account: Union[CheckingAccount, SavingsAccount]):
+    super().__init__(name, age, cpf)
     self._account = account
 
   @property
