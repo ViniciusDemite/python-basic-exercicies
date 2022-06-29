@@ -36,17 +36,19 @@ def create_clients_and_accounts():
   clients = import_clients()
 
   for client in clients:
-    params = [client['account'], client['account_number'], client['balance'], client['cpf']]
+    params = [client['account'], client['account_number'], client['balance']]
 
     account = SavingsAccount(*params) if client['account'] == 'savings' else CheckingAccount(*params)
 
-    bank.clients = Client(name=client['name'], age=client['age'], account=account)
+    bank.clients = Client(name=client['name'], age=client['age'], cpf=client['cpf'], account=account)
 
 def import_clients() -> list:
   with open('clients.json') as file:
     data = json.load(file)
 
   return data['clients']
+
+create_clients_and_accounts()
 
 while True:
   print('Bem-vindo ao sistema bancário!!', 'Digite suas informações para acessar a conta:', sep='\n', end='\n\n')
@@ -56,8 +58,10 @@ while True:
   account_number = input('Número da conta: ')
 
   if not bank.is_authenticated(agency, cpf, account_number):
-    print(f'Client ou conta não encontrados no banco {bank.name}!!!', end='\n\n')
+    print(f'Cliente ou conta não encontrados no banco {bank.name}!!!', end='\n\n')
     continue
+
+  print(end='\n\n')
 
   print('Qual operação deseja realizar?', '1 - Depósito', '2 - Saque', '3 - Sair', sep='\n', end='\n\n')
 
@@ -82,6 +86,8 @@ while True:
         deposit = float(input('Digite o valor do depósito: '))
 
         bank.current_client.account.deposit(deposit)
+
+        print('Valor depositado com sucesso!!!', f'Saldo atual: {bank.current_client.account.balance:.2}', sep='\n', end='\n\n')
   except ValueError as error:
     print('É necessário digitar um número inteiro válido!!!')
     continue
