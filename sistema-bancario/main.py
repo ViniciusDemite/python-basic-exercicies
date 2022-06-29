@@ -79,11 +79,13 @@ while True:
       if has_limit:
         print(f'Limite disponível: R$ {bank.current_client.account.limit:.2f}', end='\n\n')
 
-        withdraw_value = float(input('Valor do saque: '))
+        withdraw_value = float(input('Valor do saque: ').replace(',', '.'))
 
         bank.current_client.account.withdraw(withdraw_value)
+
+        print('Saque efetuado com sucesso!!!', f'Saldo atual: {bank.current_client.account.balance:.2f}', sep='\n', end='\n\n')
     else:
-        deposit = float(input('Digite o valor do depósito: '))
+        deposit = float(input('Digite o valor do depósito: ').replace(',', '.'))
 
         bank.current_client.account.deposit(deposit)
 
