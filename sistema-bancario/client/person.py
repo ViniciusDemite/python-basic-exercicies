@@ -1,6 +1,3 @@
-import re
-
-
 class Person:
   def __init__(self, name: str, age: int, cpf: str):
     self._name = name

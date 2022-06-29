@@ -1,5 +1,5 @@
 from abc import ABC, abstractstaticmethod
-from types import Union
+from typing import Union
 
 class Account(ABC):
   def __init__(self, agency: str, number: str, balance: Union[int, float]):

@@ -1,7 +1,6 @@
 from client.client import Client
 from account.checking_account import CheckingAccount
 from account.savings_account import SavingsAccount
-from types import Union
 
 
 class Bank:

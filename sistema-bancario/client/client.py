@@ -1,7 +1,7 @@
+from typing import Union
 from client.person import Person
 from account.checking_account import CheckingAccount
 from account.savings_account import SavingsAccount
-from types import Union
 
 
 class Client(Person):
