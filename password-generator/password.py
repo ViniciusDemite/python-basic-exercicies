@@ -5,7 +5,7 @@ import re
 class Password():
   def __init__(self, length: int):
     self._length = length
-    self._special_chars = re.sub(r'([#$@!&\*\-\_])', string.string.punctuation)
+    self._special_chars = re.sub(r'([^#$@!&\*\-\_])', '', string.punctuation)
 
   @property
   def length(self) -> int:
