@@ -31,5 +31,5 @@ class Password():
     new_length -= (self.length + random.uniform(100, 10000))
 
     return round(
-        new_length / self.length * random.randint(2, 10)
+      abs(new_length / self.length * random.randint(2, 10))
     )
